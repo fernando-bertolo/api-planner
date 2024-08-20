@@ -2,9 +2,6 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from 'zod';
 import { prisma } from "../lib/prisma";
-import { dayjs } from "../lib/dayjs";
-import { getMailClient } from "../lib/mail";
-import nodemailer from "nodemailer";
 
 export async function confirmParticipants(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().get('/participants/:participantId/confirm', {
@@ -14,7 +11,7 @@ export async function confirmParticipants(app: FastifyInstance) {
       })
     },
   }, async (request, reply) => {
-    const { participantId } = request.params;
+    const { participantId } = request.params; 
 
     const participant = await prisma.participant.findUnique({
       where: {

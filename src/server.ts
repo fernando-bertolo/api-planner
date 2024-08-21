@@ -1,5 +1,4 @@
 import fastify from "fastify";
-import { prisma } from "./lib/prisma";
 import { createTrip } from "./routes/create-trip";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 import { confirmTrip } from "./routes/confirm-trip";
@@ -14,6 +13,7 @@ import { createInvite } from "./routes/create-invite";
 import { updateTrip } from "./routes/update-trip";
 import { getTripDetails } from "./routes/get-trip-details";
 import { getParticipant } from "./routes/get-participant";
+import { errorHandler } from "./error-handler";
 
 const app = fastify();
 
@@ -23,6 +23,8 @@ app.register(cors, {
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+
+app.setErrorHandler(errorHandler)
 
 
 app.register(createTrip)

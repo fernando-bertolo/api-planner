@@ -79,7 +79,7 @@ export async function createTrip(app: FastifyInstance) {
       
       <div style="font-family: sans-serif; font-size: 16px; line-height: 1.6;">
         <p>
-          Você solicitou a criação de uma viagem para <strong>${ destination }</strong> nas datas de <strong>${formattedStartDate}</strong> até <strong>${formattedEndDate}</strong>.
+          Você solicitou a criação de uma viagem para <strong>${destination}</strong> nas datas de <strong>${formattedStartDate}</strong> até <strong>${formattedEndDate}</strong>.
         </p>
         <p></p>
         <p>Para confirmar sua viagem, clique no link abaixo:</p>
@@ -98,17 +98,10 @@ export async function createTrip(app: FastifyInstance) {
       `.trim() //Tira os espaços desnecessários
     })
 
-  console.log(nodemailer.getTestMessageUrl(message))
+    console.log(nodemailer.getTestMessageUrl(message))
 
-  return { TripId: trip.id }
-})
+    return { TripId: trip.id }
+  })
 
-
-
-app.get('/trips', async (request, response) => {
-  const trips = prisma.trip.findMany();
-
-  return trips;
-})
 
 }
